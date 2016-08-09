@@ -89,6 +89,17 @@ TXQUEUELEN = '\s+txqueuelen(\s|:)(?P<if{0}TxQueueLen>\d+)'
 
 
 class DefaultScanConfig(object):
+    # for ip utility which produce very long output
+    componentSplit = '\n'
+    componentScanner = r'^(\d+):(\s)(?P<component>\S+?):?[ \t]+'
+    scanners = [
+        r'(.*)RX:(\s+)bytes(\s+)packets(\s+)errors(\s+)dropped(\s+)overrun(\s+)mcast(\s+)\\(\s+)(?P<ifInOctets>\d+)(\s+)(?P<ifInPackets>\d+)(\s+)(?P<ifInErrors>\d+)(\s+)(?P<ifInDropped>\d+)(\s+)(?P<ifInOverruns>\d+)',
+        r'(.*)TX:(\s+)bytes(\s+)packets(\s+)errors(\s+)dropped(\s+)carrier(\s+)collsns(\s+)\\(\s+)(?P<ifOutOctets>\d+)(\s+)(?P<ifOutPackets>\d+)(\s+)(?P<ifOutErrors>\d+)(\s+)(?P<ifOutDropped>\d+)(\s+)(?P<ifOutCarrier>\d+)(\s+)(?P<ifOutCollisions>\d+)',
+        ]
+    componentScanValue = 'interfaceName'
+
+
+class AltScanConfig(object):
     # for ifconfig
     componentSplit = '\n\n'
     componentScanner = r'^(?P<component>\S+?):?[ \t]+'
@@ -105,17 +116,6 @@ class DefaultScanConfig(object):
         r''.join([TX, ERRORS, DROPPED, OVERRUNS, CARRIER, COLLISIONS]).format(OUT),
         # Mixed
         r''.join([TXQUEUELEN]).format(OUT),
-        ]
-    componentScanValue = 'interfaceName'
-
-
-class AltScanConfig(object):
-    # for ip utility which produce very long output
-    componentSplit = '\n'
-    componentScanner = r'^(\d+):(\s)(?P<component>\S+?):?[ \t]+'
-    scanners = [
-        r'(.*)RX:(\s+)bytes(\s+)packets(\s+)errors(\s+)dropped(\s+)overrun(\s+)mcast(\s+)\\(\s+)(?P<ifInOctets>\d+)(\s+)(?P<ifInPackets>\d+)(\s+)(?P<ifInErrors>\d+)(\s+)(?P<ifInDropped>\d+)(\s+)(?P<ifInOverruns>\d+)',
-        r'(.*)TX:(\s+)bytes(\s+)packets(\s+)errors(\s+)dropped(\s+)carrier(\s+)collsns(\s+)\\(\s+)(?P<ifOutOctets>\d+)(\s+)(?P<ifOutPackets>\d+)(\s+)(?P<ifOutErrors>\d+)(\s+)(?P<ifOutDropped>\d+)(\s+)(?P<ifOutCarrier>\d+)(\s+)(?P<ifOutCollisions>\d+)',
         ]
     componentScanValue = 'interfaceName'
 

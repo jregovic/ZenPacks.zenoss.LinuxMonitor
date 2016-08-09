@@ -514,6 +514,9 @@ The following flavors of Linux are supported
 
 == Changes ==
 
+;2.0.4
+* Fix possible N/A values on interface error rate graph (ZEN-24388)
+
 ;2.0.3
 * Fix migration of Linux devices to new type. (ZEN-24293)
 
