@@ -10,7 +10,7 @@
 import logging
 LOG = logging.getLogger("zen.LinuxMonitor")
 
-from . import zenpacklib
+from ZenPacks.zenoss.ZenPackLib import zenpacklib
 import os.path
 from Products.CMFCore.DirectoryView import registerDirectory
 
@@ -18,11 +18,10 @@ skinsDir = os.path.join(os.path.dirname(__file__), 'skins')
 if os.path.isdir(skinsDir):
     registerDirectory(skinsDir, globals())
 
-# CFG is necessary when using zenpacklib.TestCase.
+
 CFG = zenpacklib.load_yaml()
 
-from . import schema
-
+schema = CFG.zenpack_module.schema
 
 class ZenPack(schema.ZenPack):
 
