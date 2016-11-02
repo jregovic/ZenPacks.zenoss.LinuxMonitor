@@ -91,7 +91,7 @@ class lvm(CommandPlugin):
                'lsblk -rb 2>&1; '
                'sudo pvs --units b --nosuffix -o pv_name,pv_fmt,pv_attr,pv_size,pv_free,pv_uuid,vg_name 2>&1; '
                'sudo vgs --units b --nosuffix -o vg_name,vg_attr,vg_size,vg_free,vg_uuid 2>&1; '
-               'sudo lvs --units b --nosuffix -o lv_name,vg_name,lv_attr,lv_size,lv_uuid,origin 2>&1 ')
+               'sudo lvs --units b --nosuffix -o lv_name,vg_name,lv_attr,lv_size,lv_uuid,origin 2>&1')
 
     def process(self, device, results, log):
         ignore_unmounted = getattr(device, 'zIgnoreUnmounted', None)
